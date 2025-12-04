@@ -11,8 +11,14 @@ public class Result {
     public static Result fail(){
         return result(400,"操作失败",0L,null);
     }
+    public static Result fail(Object data){
+        return result(400,"操作失败",0L,data);
+    }
     public static Result success(){
         return result(200,"操作成功",0L,null);
+    }
+    public static Result success(Object data,String  message){
+        return result(200,message,0L,data);
     }
     public static Result success(Object data){
         return result(200,"操作成功",0L,data);
