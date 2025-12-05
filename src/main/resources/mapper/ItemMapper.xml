@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.wby.mapper.ItemMapper">
+    <select id="pageC" resultType="top.wby.entity.User">
+        SELECT * FROM item
+    </select>
+    <select id="pageCC" resultType="top.wby.entity.Item">
+        select *from item ${ew.customSqlSegment}
+    </select>
+</mapper>

@@ -4,20 +4,18 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import org.springframework.stereotype.Service;
-import top.wby.entity.User;
+import top.wby.entity.Warehouse;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * <p>
- *  服务类
+ * 仓库主表 服务类
  * </p>
  *
  * @author wby
- * @since 2025-11-26
+ * @since 2025-12-04
  */
+public interface IWarehouseService extends IService<Warehouse> {
 
-public interface IUserService extends IService<User> {
-    IPage<User> pageC(IPage<User> page);
-    IPage<User> pageCC(IPage<User> userPage, Wrapper wapper);
+    IPage<Warehouse> pageCC(IPage<Warehouse> userPage, Wrapper wrapper);
 }

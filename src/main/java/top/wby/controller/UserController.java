@@ -104,7 +104,6 @@ public class UserController {
         if (query.getParams().containsKey("name") && query.getParams().get("name") != null){
             userLambdaQueryWrapper.like(User::getName, query.getParams().get("name"));
         }
-//        IPage<User> page = userService.pageC(userPage);
         if (query.getParams().containsKey("sex") && query.getParams().get("sex") != null){
             userLambdaQueryWrapper.eq(User::getSex, query.getParams().get("sex"));
         }
