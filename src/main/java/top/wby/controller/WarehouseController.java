@@ -16,14 +16,7 @@ import top.wby.service.IWarehouseService;
 
 import java.util.List;
 
-/**
- * <p>
- * 仓库主表 前端控制器
- * </p>
- *
- * @author wby
- * @since 2025-12-04
- */
+
 @RestController
 @RequestMapping("/warehouse")
 public class WarehouseController {
@@ -34,11 +27,40 @@ public class WarehouseController {
         return Result.success(warehouseService.list());
     }
     @PostMapping("/add")
-    public Result add(Warehouse warehouse) {
-        return Result.success(warehouseService.save(warehouse));
+    public Result add(@RequestBody Warehouse warehouse) {
+       try {
+           if (warehouse.getName() == null || warehouse.getName().trim().isEmpty()) {
+               return Result.fail("仓库名称不能为空");
+           }
+
+           // 验证 Status 字段值
+           if (warehouse.getStatus() != null &&
+                   !warehouse.getStatus().matches("^(Operational|Maintenance|Closed)$")) {
+               return Result.fail("状态值必须为 Operational, Maintenance 或 Closed");
+           }
+
+           // 设置默认状态
+           if (warehouse.getStatus() == null) {
+               warehouse.setStatus("Operational");
+           }
+           LambdaQueryWrapper<Warehouse> queryWrapper = new LambdaQueryWrapper<>();
+           queryWrapper.eq(Warehouse::getName, warehouse.getName());
+           if (warehouseService.count(queryWrapper) > 0) {
+               return Result.fail("仓库名称已存在");
+           }
+
+           boolean saved = warehouseService.save(warehouse);
+           if (saved) {
+               return Result.success("添加成功");
+           } else {
+               return Result.fail("添加失败");
+           }
+       } catch (Exception e) {
+           return Result.fail("添加失败: " + e.getMessage());
+       }
     }
     @PostMapping("/update")
-    public Result update(Warehouse warehouse) {
+    public Result update(@RequestBody Warehouse warehouse) {
         return Result.success(warehouseService.updateById(warehouse));
     }
     @DeleteMapping("/delete/{id}")

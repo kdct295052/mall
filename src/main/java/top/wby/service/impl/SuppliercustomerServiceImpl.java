@@ -1,5 +1,8 @@
 package top.wby.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import jakarta.annotation.Resource;
 import top.wby.entity.Suppliercustomer;
 import top.wby.mapper.SuppliercustomerMapper;
 import top.wby.service.ISuppliercustomerService;
@@ -16,5 +19,11 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class SuppliercustomerServiceImpl extends ServiceImpl<SuppliercustomerMapper, Suppliercustomer> implements ISuppliercustomerService {
+    @Resource
+    private SuppliercustomerMapper suppliercustomerMapper;
+    @Override
+    public IPage<Suppliercustomer> pageCC(IPage<Suppliercustomer> ipage, Wrapper<Suppliercustomer> wrapper) {
+        return suppliercustomerMapper.pageCC(ipage,wrapper);
 
+    }
 }

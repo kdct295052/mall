@@ -1,7 +1,12 @@
 package top.wby.service;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import top.wby.entity.Suppliercustomer;
 import com.baomidou.mybatisplus.extension.service.IService;
+import top.wby.entity.User;
 
 /**
  * <p>
@@ -13,4 +18,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ISuppliercustomerService extends IService<Suppliercustomer> {
 
+    public IPage<Suppliercustomer> pageCC(IPage<Suppliercustomer> ipage, Wrapper<Suppliercustomer> wrapper);
 }

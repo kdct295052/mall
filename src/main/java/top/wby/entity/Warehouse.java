@@ -40,6 +40,6 @@ public class Warehouse implements Serializable {
     @ApiModelProperty("负责人UserID")
     @TableField("managerID")
     private Integer managerID;
-
-    private String status;
+    @TableField("Status")
+    private String status= "Operational";;
 }

@@ -12,14 +12,7 @@ import top.wby.entity.User;
 import top.wby.service.ICategoryService;
 import top.wby.service.IUserService;
 
-/**
- * <p>
- * 货品分类表 前端控制器
- * </p>
- *
- * @author wby
- * @since 2025-12-04
- */
+
 @RestController
 @RequestMapping("/category")
 public class CategoryController {

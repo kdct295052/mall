@@ -13,15 +13,10 @@ import top.wby.entity.User;
 import top.wby.service.IUserService;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
-/**
- * <p>
- *  前端控制器
- * </p>
- *
- * @author wby
- * @since 2025-11-26
- */
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -32,6 +27,20 @@ public class UserController {
     public List<User> list() {
         return userService.list();
     }
+    @GetMapping("/user/all-managers")
+    //返回格式为 { code: 200, data: [{ id, name }] }
+    public Result allManagers() {
+        List<User> users = userService.list();
+
+        // 转换为只包含id和name的格式
+        List<Object> managers = users.stream().map(user -> {
+            return Map.of("id", user.getId(), "name", user.getName());
+        }).collect(Collectors.toList());
+
+        return Result.success(managers);
+    }
+
+
     @PostMapping("/save")
     public Result save(@Valid @RequestBody User user) {
         return userService.save(user) ? Result.success(true) : Result.fail( false);
